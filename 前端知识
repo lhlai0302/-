@@ -1,0 +1,924 @@
+# 排序算法
+## 冒泡排序
+```javascript
+for(let i=0;i<length;i++){
+	for(let j=0;j<length-1;j++){
+		if(compareFn(array[j],array[j+1])===Compare.BIGGER_THAN){
+			swap(array,j,j+1);
+		}
+	}
+}
+```
+
+## 选择排序
+```javascript
+let indexMin;
+for(let i=0;i<length-1;i++){
+	indexMin=i;
+	for(let j=i;j<length;j++){
+		if(compareFn(array[indexMin],array[j]===Compare.BIGGER_THAN){
+			indexMin=j;
+		}
+	}
+	if(i!==indexMin){
+		swap(array,i,indexMin);
+	}
+}
+```
+
+## 插入排序
+```javascript
+let temp;
+for(let i=1;i<length;i++){
+	let j=i;
+	temp=array[i];
+	while(j>0&&compareFn(array[i-1],temp)===Compare.BIGGER_THAN){
+		array[j]=array[j-1];
+		j--;
+	}
+	array[j]=temp;
+}
+```
+
+# cookie sessionStorage localStorage的区别
+共同点：都是保存在浏览器端，而且是同源的。
+cookie数据始终在同源的http请求中携带（即使不需要），即cookie在浏览器和服务器之间来回传递。而sessionStorage和localStorage不会自动把数据发送给服务器，仅在本地保存。cookie数据还有路径的概念，可以限制cookie只属于某路径下，存储的大小很小只有4K左右。
+sessionStorage仅在当前浏览器窗口关闭前有效，自然也就不可能持久保持。
+localStorage始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据。
+cookie只在设置的cookie过期时间前一直有效，即使窗口或者浏览器关闭。
+
+# cookie和session的区别
+ 1. cookie保存在客户的浏览器上，session数据存放在服务器上。
+ 2. cookie不是很安全，别人可以分析存放在本地的cookie并进行cookie欺骗，考虑到安全应当使用session。
+ 3. session会在一定时间内保存在服务器上，当访问增多，会比较占用副武器的性能，考虑到减轻服务器性能方面，应当使用cookie。
+ 4. 单个cookie保存的数据不能超过4K，很多浏览器都限制一个站点最多保存20个cookie。
+
+# get和post的区别
+ 1. get参数通过url传递，post放在request body中；
+ 2. get请求在url中传递的参数是有长度限制的，而post没有；
+ 3. get比post更不安全，因为参数直接暴露在url中，所以不能用来传递敏感信息；
+ 4. get请求只能进行url编码，而post支持多种编码方式；
+ 5. get请求参数会被完整保留在浏览历史记录里，而post中的参数不会被保留；
+ 6. get产生一个TCP数据包，post产生两个TCP数据包。
+
+# 输入url到页面加载显示完成发生了什么
+ 1. DNS解析
+ 2. TCP连接
+ 3. 发送HTTP请求
+ 4. 服务器处理请求并返回HTTP报文
+ 5. 浏览器解析渲染页面
+ 6. 连接结束
+
+# Flex布局
+## flex-direction：决定主轴的方向。
+ 1. row（默认值）：主轴为水平方向，起点在左端。
+ 2. row-reverse：主轴为水平方向，起点在右端。
+ 3. column：主轴为垂直方向，起点在上沿。
+ 4. column-reverse：主轴为垂直方向，起点在下沿。
+
+## flex-wrap：默认情况下，项目都排在一条线上。如果一条轴线排不下，如何换行
+ 1. nowrap（默认）：不换行。
+ 2. wrap：换行，第一行在上方。
+ 3. wrap-reverse：换行，第一行在下方。
+
+## justify-content：定义了项目在主轴上的对齐方式。
+具体对齐方式与主轴有关，假设主轴为从左到右：
+ 1. flex-start（默认值）：左对齐。
+ 2. flex-end：右对齐。
+ 3. center：居中。
+ 4. space-between：两端对齐，项目之间的间隔相等。
+ 5. space-around：每个项目两侧的间隔相等，所以，项目之间的间隔比项目与边框的间隔大一倍。
+
+## align-items：项目在交叉轴上如何对齐。
+具体的对齐方式与交叉轴的方向有关，假设交叉轴从上到下：
+
+ 1. flex-start：交叉轴的起点对齐。
+ 2. flex-end：交叉轴的终点对齐。
+ 3. center：交叉轴的中点对齐。
+ 4. baseline：项目第一行文字的基线对齐。
+ 5. stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+
+## order：定义项目的排列顺序。数值越小，排列越靠前，默认为0。
+
+## flex-grow：定义项目的放大比例。默认为0，即如果存在剩余空间也不放大。
+## flex-shrink：定义了项目的缩小比例，默认为1，即如果空间不足，将该项目缩小。
+## align-self：允许单个项目有与其他项目不一样的对齐方式，可覆盖align-item属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+auto | flex-start | flex-end | center | baseline | stretch
+
+# 实现垂直居中的几种方法
+
+```javascript
+<div>
+	<img src="mm.jpg" />
+</div>
+```
+
+ 1. margin:auto法
+ ```css
+div{
+	width:400px;
+	height:400px;
+	position:relative;
+	border:1px solid #465468;
+}
+img{
+	position:absolute;
+	margin:auto;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+}
+```
+ 2. margin负值法
+```css
+div{
+	width:500px;
+	height:400px;
+	border:2px solid #379;
+	position:relative;
+}
+img{
+	width:480px;
+	height:380px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-190px;     /*height的一半*/
+	margin-left:-240px;    /*width的一半*/
+}
+```
+可以将margin-top和margin-left负值替换成transform:translateX(-50%)和transform:translateY(-50%)
+
+ 3. table-cell（未脱离文档流的）
+设置父元素的display:table-cell，并且vertical-align:middle，这样子元素可以实现垂直居中。
+```css
+div{
+	width:300px;
+	height:300px;
+	border:3px solid #555;
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+img{
+	vertical-align:middle;
+}
+```
+
+ 4. flex
+ 将父元素设置为display:flex，并且设置align-items:center;justify-content:center;
+```css
+div{
+	width:300px;
+	height:200px;
+	border:3px solid #54646;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+img{
+	...
+}
+```
+
+# visibility:hidden  opacity:0  display:none
+opacity:0，该元素被隐藏起来了，但不会改变页面布局，并且如果该元素已经绑定一些时间，如click事件，那么点击该区域，也能触发点击事件。
+visibility:hidden，该元素隐藏起来了，但不会改变页面布局，但是不会触发该元素已经绑定的事件。
+display:none，把元素隐藏起来，改变了页面的布局，可以理解成在页面中把该元素删除掉。
+
+# position属性的比较
+## 固定定位fixed
+元素的位置相对于浏览器窗口是固定位置，即使窗口是滚动的，它也不会移动。fixed定位使元素的位置与文档流无关，因此不占据控件，fixed定位的元素和其他元素重叠。
+
+## 相对定位relative
+如果对一个元素进行相对定位，它将出现在它所在的位置上。然后，可以通过设置垂直或水平位置，让这个元素“相对于”它的起点进行移动。在使用相对定位时，无论是否进行移动，元素仍然占据原来的空间。因此，移动元素会导致它覆盖其他框。
+
+## 绝对定位absolute
+绝对定位的元素的位置相对于最近的已定位父元素，如果元素没有已定位的父元素，那么它的位置相对于<html>。absolute定位使元素的位置与文档流无关，因此不占据空间。absolute定位的元素和其他元素重叠。
+
+## 默认定位static
+没有定位，默认值。元素出现在正常的流中。
+
+# 什么是文档流
+文档流是文档中可显示的对象在排列时所占用的位置。
+
+# 清除CSS浮动的几种方法
+当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的现象叫浮动溢出。
+
+ 1. 使用带clear属性的空元素
+在浮动元素后使用一个空元素如`<div class="clear"></div>`，并在css中赋予`.clear{clear:both;}`属性即可清除浮动。亦可使用`<br class="clear" />`来进行处理。
+```css
+.news{
+	background-color:gray;
+	border: 1px solid black;
+}
+.news img{
+	float:left;
+}
+.news p{
+	float:right;
+}
+.clear{
+	clear:both;
+}
+```
+
+```javascript
+<div class="news">
+	<img src="news-pic.jpg" />
+	<p>some text</p>
+	<div class="clear"></div>
+</div>
+```
+
+ 2. 使用css的overflow属性
+给浮动元素的容器添加`overflow:hidden;`或`overflow:auto;`可以清除浮动，另外在IE6中还需触发hasLayout，例如为父元素设置容器高度或设置`zoom:1`。
+在添加了overflow属性后，浮动元素又回到了容器层，把容器高度撑起，达到了清除浮动的效果。
+```css
+.news{
+	overflow:hidden;
+	zoom:1;
+}
+```
+
+ 3. 给浮动的元素的容器添加浮动
+ 4. 使用邻接元素处理
+给浮动元素后面的元素添加clear属性
+```css
+.content{
+	clear:both;
+}
+```
+
+```javascript
+<div class="news">
+	<img src="news-pic.jpg" />
+	<p>some text</p>
+	<div class="content"></div>
+</div>
+```
+
+ 5. 使用CSS的:after伪元素
+ 给浮动元素的容器添加一个clearfix的class，然后给这个class添加一个:after伪元素实现元素末尾添加一个看不见的块元素清除浮动。
+```css
+.clearfix:after{
+	content:"020";
+	display:block;
+	height:0;
+	clear:both;
+	visibility:hidden;
+}
+.clearfix{
+	zoom:1
+}
+```
+```javascript
+<div class="news clearfix">
+	<img src="news-pic.jpg" />
+	<p>some text</p>
+</div>
+```
+
+# 闭包
+闭包就是能够读取其他函数内部变量的函数，简单来说就是定义在一个函数内部的函数。闭包就是将函数内部和函数外部连接起来的一座桥梁。一是可以读取函数内部的变量，二是让这些变量的值始终保持在内存中。
+
+# 改变函数内部this指针的指向函数（bind apply call的区别）
+通过apply和call改变函数的this指向，他们两个函数的第一个参数都是一样的，表示要改变指向的那个对象，第二个参数，apply是数组，call是arg1，arg2，...这种形式。通过bind改变this作用域会返回一个新的函数，这个函数不会马上执行。
+
+# Promise
+Promise是一个对象，保存着未来将要结束的事件，它有两个特征：
+
+ 1. 对象的状态不受外部影响，Promise对象代表一个异步操作，有三种状态，pending进行中，fulfilled已成功，rejected已失败，只有异步操作的结果，才可以决定当前是哪一种状态，任何其他操作都无法改变这个状态。
+ 2. 一旦状态改变，就不会再变。Promise对象状态改变只有两种可能，从peding到fulfilled或者从pending到rejected，只要这两种情况发生，状态就凝固了，不会再改变，这个时候就称为定型resolved。
+ 3. Promise的基本用法
+```javascript
+let p=new Promise(function(resolve,reject){
+	setTimeout(function(){
+		resolve('ok')
+	},1000)
+});
+p.then(function success(val){
+	console.log(val);
+})
+```
+
+# let const var的区别
+var声明的变量是全局或者整个函数块的，而let,const声明的变量是块级的变量，var声明的变量存在变量提升，let，const不存在，let声明的变量允许重新赋值，const不允许。
+
+# 变量提升
+将当前作用域的所有变量的声明都提升到顶部。
+函数声明高于一切。有多个函数声明的时候，是由最后面的函数声明来替代前面。
+
+# HTTP状态码
+状态码可以按照第一个数字分类，1表示信息，2表示成功，3表示重定向，4表示客户端错误，5表示服务器错误。
+## 301和302的区别
+301：永久移动，请求的网页已永久移动到新的位置，服务器返回此响应，会自动将请求者转到新位置。
+302：历史移动，服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来继续以后的请求。
+## 200和304的区别
+200：表示成功，服务器已经成功处理了请求，通常表示为服务器提供了请求的网页。
+304：表示未修改，自从上次请求后，请求的网页未修改过，服务器返回此响应时不会返回网页内容。
+
+# 进程和线程
+进程是并发执行的程序在执行过程中分配和管理资源的基本单位。
+线程是进程的一个实体，是CPU调度分派的基本单位，线程之间基本上不拥有系统资源。
+一个程序至少有一个进程，一个进程至少有一个线程，资源分配给进程，同一个进程下所有线程共享该进程的资源。
+
+# 数组去重的几种方法
+ 1. 利用对象键值对中键的唯一性
+```javascript
+var arr=[1,2,3,2,3];
+var toObject=function(arr){    //将数组转换为对象
+	var obj={};
+	for(var i=0;i<arr.length;i++){
+		obj[arr[i]]=true;
+	}
+	return obj;
+}
+var toArray=function(obj){    //将对象转换为数组
+	var arr=[];
+	for(var i in obj){
+		arr.push(i);
+	}
+	return arr;
+}
+```
+ 2. Array.sort()遍历冒泡（相邻元素去重）
+```javascript
+arr=arr.sort();
+var newArr=[];
+for(var i=0;i<arr.length;i++){
+	if(arr[i]!=arr[i-1]){
+		newArr.push(arr[i]);
+	}
+}
+```
+ 3. 双层for循环
+```javascript
+var len=arr.length;
+for(let i=0;i<len;i++){
+	for(let j=i+1;j<len;j++){
+		if(arr[i]==arr[j]){
+			arr.splice(j,1);  //splice会改变数组长度，所以要将数组长度len和下标j减一
+			len--;
+			j--;
+		}
+	}
+}
+```
+ 4. Array.filter()加indexOf
+```javascript
+arr.filter((item,index)=>{
+	return arr.indexOf(item)===index;
+})
+```
+ 5. ES6的Set去重
+```javascript
+Array.from(new Set(arr));
+```
+
+# 数组的方法
+ 1. str.split()将字符串转为数组
+```javascript
+let str='123456';
+str.split('');
+```
+ 2. arr.sort()将数组进行排序，是按照最左边的数字进行排序的
+ 3. arr.forEach((value,index,array)=>{})遍历数组，无返回值
+value当前索引的值   index索引   array原数组
+ 4. arr.map((value,index,array)=>{})遍历数组，返回一个新数组
+ 5. arr.filter(..)返回一个满足条件的数组
+```javascript
+arr.filter((value,index)=>value<3)
+```
+ 6. arr.every(..)依据判断条件，数组的元素是否全满足，若全满足则返回true
+ 7. arr.some(..)依据判断条件，数组的元素是否有一个满足，若有一个满足则返回true
+```javascript
+arr.some((value,index)=>value<3)
+```
+ 8. arr.indexOf()查找某个元素的索引值，若有重复的，则返回第一个查到的索引值，若不存在，返回-1
+ 9. arr.lastIndexOf()从后往前查找
+ 10. Array.from()将伪数组变为数组，就是只要有length的就可以转成数组
+```javascript
+let str='12345';
+Array.from(str);  //["1","2","3","4","5"]
+let obj={0:'a',1:'b',length:2};
+Array.from(obj);  //["a","b"]
+```
+ 11. arr.find(..)找到第一个符合条件的数组成员
+```javascript
+arr.find((value,index,array)=>value<3)
+```
+ 12. arr.findIndex()找到第一个符合条件的数组成员的索引值
+ 13. arr.fill(target,start,end)使用给定的值填充一个数组
+target 待填充的元素    start 开始填充的位置   end 终止填充的位置（不包括该位置）
+```javascript
+let arr=[1,2,3,4,5];
+arr.fill(5);  //[5,5,5,5,5]
+arr.fill(5,2);  //[1,2,5,5,5]
+arr.fill(5,1,3);   //[1,5,5,5,5]
+```
+ 14. arr.includes()判断数组中是否包含给定的值
+ 15. arr.keys()遍历数组的键名
+ 16. arr.values()遍历数组的键值
+ 17. arr.entries()遍历数组的键名和键值
+```javascript
+let arr=[1,2,3,4];
+arr.entries();  //[0,1] [1,2] [2,3] [3,4]
+```
+
+# JSONP的实现原理
+由于浏览器的安全性限制，不允许AJAX访问协议不同、域名不同、端口号不同的数据接口，浏览器认为这种访问不安全。
+可以通过动态创建script标签的形式，把script标签的src属性，指向数据接口的地址，因为script标签不存在跨域限制，这种数据获取方式，称作JSONP。（JSONP只支持get请求）
+
+# Vue
+## Vue的生命周期
+根据生命周期的不同分为三类：创建阶段的生命周期、运行阶段的生命周期、销毁阶段的生命周期。
+ 1. 创建阶段的生命周期
+
+beforeCreate()方法是在实例还没有被完全创建出来之前执行，这个方法执行的时候，无论是data中的数据还是methods中的方法都没有被初始化。
+
+created()方法此时已经初始化好了Vue对象，这是最早能操作数据和methods中方法的地方。
+
+beforeMount()方法指该模板已经在内存中编译完成，但是尚未将其渲染到页面中去，在该方法执行期间，页面中的元素还没有经过Vue的渲染，此时的{{msg}}仍然是一个{{msg}}。
+
+mounted()方法表示内存中的模板已经渲染到页面中去，这个时候数据已经可以经过Vue的编译，该函数式实例创建的最后一个函数，此时实例已经完全创建好了，如果没有别的操作的话，此函数就静静躺在内存中，如果要使用某些插件操作页面上的DOM，最早要在mounted()中操作。
+
+ 2. 运行阶段的生命周期
+
+beforeUpdate()事件执行的时候，页面中显示的数据并没有更新，但是内存中的数据已经改变，也就是说此时页面尚未和最新的数据保持同步。
+
+updated()事件执行的时候，页面中的数据已经和内存保持一致了，也就是说此时已经是最新的了。
+
+ 3. 销毁阶段的生命周期
+
+当执行beforeDestroy钩子函数的时候，Vue实例就已经从运行阶段进入到了销毁阶段。当执行beforeDestroy的时候，实例身上所有的data和所有的methods以及过滤器、指令等都处于可用状态，此时，还没有真正执行销毁的过程。
+
+当执行到destroyed()函数的时候，组件已经被完全销毁了，此时，组件中所有的数据、方法、指令、过滤器都已经不可用了。
+
+## v-for为什么要有key
+当Vue.js用v-for正在更新已渲染过的元素列表时，它默认用“就地复用”策略，如果数据项的顺序被改变，Vue将不是移动DOM元素来匹配数据项的顺序，而是简单复用此处每个元素，并且确保它在索引下显示已被渲染过的每个元素。为了给Vue一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，需要为每项提供一个唯一的key属性。
+
+## 过滤器
+```javascript
+<td>{{item.ctime | dateFormat('yyyy-mm-dd')}}</td>
+```
+ 1. 私有过滤器
+```javascript
+filters:{    //只能在当前VM对象所控制的View区域进行使用
+	dateFormat(input,pattern=""){    //通过pattern指定形参默认值
+		...
+	}
+}
+```
+ 2. 全局过滤器
+```javascript
+Vue.filter('dateFormat',function(input,pattern=""){
+	...
+})
+```
+
+## 自定义指令
+```javascript
+<input type="text" v-model="searchName" v-focus v-color="red" v-font-weight="900" />
+```
+ 1. 自定义全局指令
+```javascript
+Vue.directive('focus',{   //v-focus为绑定元素自动获取焦点
+	inserted:function(el){  //inserted表示绑定元素插入父节点时调用
+		el.focus():
+	}
+})
+```
+ 2. 自定义局部指令
+```javascript
+directives:{
+	color:{  //为元素设置指定的字体颜色
+		bind(el,binding){
+			el.style.color=binding.value;
+		}
+	},
+	'font-weight':function(el,binding2){  //自定义指令的简写形式，等同于定义了bind和update两个钩子函数
+		el.style.fontWeight=binding2.value;
+	}
+}
+```
+
+  
+## Vue中的动画
+1. 使用过渡类名
+v-enter（时间点）进入之前，元素的起始状态，此时还没有开始进入
+v-leave-to（时间点）动画离开之后，离开的终止状态，此时动画已经结束
+v-enter-active（入场动画的时间段）
+v-leave-active（离场动画的时间段）
+```javascript
+<div id="app">
+	<input type="button" value="动起来" @click="myAnimate" />
+	<!-- transition将需要过渡的元素包裹起来 -->
+	<transition name="fade">
+		<div v-show="isshow">动画</div>
+	</transition>
+</div>
+
+var vm=new Vue({
+	el:'#app',
+	data:{
+		isshow:false
+	},
+	methods:{
+		myAnimate(){
+			this.isshow=!this.isshow;
+		}
+	}
+})
+```
+定义两组类样式
+```css
+.fade-enter-active,.fade-leave-active{  //定义进入和离开时候的过渡状态
+	transition:all 0.2s ease;
+	position:absolute;
+}
+.fade-enter,.fade-leave-to{  //定义进入过渡的开始状态和离开过渡的结束状态
+	opacity:0;
+	transform:translateX(100px);
+}
+```
+如果需要过渡的元素是通过v-for循环渲染的，用transition-group包裹，如果要为v-for循环创建的元素设置动画，必须为每个元素设置:key属性
+
+ 2. 使用第三方animate.css
+```javascript
+<transition enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" :duration="400">
+//:duration={enter:200,leave:400}
+```
+ 3. 使用动画钩子函数（半场动画）
+动画生命周期函数：
+before-enter enter after-enter enter-cancelled入场
+before-leave leave after-leave leave-cancelled离场
+定义transition组件以及三个钩子函数
+```javascript
+<div id="app">
+	<input type="button" value="切换动画" @click="isshow=!isshow" />
+	<transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+		<div v-if="isshow" class="show">OK</div>
+	</transition>
+</div>
+```
+定义三个methods钩子方法
+```javascript
+methods:{
+	beforeEnter(el){  //beforeEnter：动画入场之前，此时动画尚未开始，可设置元素开始动画之前的起始样式
+		el.style.transform='translateX(500px)';  //el表示要执行动画的那个DOM元素
+	},
+	enter(el,done){  //动画进入完成时的回调。enter表示动画开始之后的样式，设置小球完成动画之后的结束状态
+		el.offWidth;  //这句话强制动画刷新，不写无动画效果
+		el.style.transform='translateX(0px)';
+		done();  //动画完成后立即消失，done其实就是afterEnter函数的引用
+	},
+	afterEnter(el){  //动画进入完成之后的回调
+		this.isshow=!this.isshow;
+	}
+}
+```
+
+## 定义Vue组件
+ 1. 使用Vue.extend配合Vue.component方法
+```javascript
+var login=Vue.extend({
+	template:'<h1>登录</h1>'
+});
+Vue.component('login',login);
+```
+ 2. 直接使用Vue.component方法
+```javascript
+Vue.component('register',{
+	template:'<h1>注册</h1>
+})
+```
+ 3. 将模板字符串定义到script标签中
+```javascript
+<script id="tmpl" type="x-template">
+	<div>
+		<a href="#">登录</a> | <a href="#">注册</a>
+	</div>
+</script>
+
+Vue.component('account',{
+	template:'#tmpl'
+})
+```
+组件中展示数据和响应事件
+```javascript
+Vue.component('account',{
+	template:'#tmpl',
+	data(){
+		return{
+			msg:'大家好'
+		}
+	},
+	methods:{
+		login(){
+			alert('点击了登录按钮');
+		}
+	}
+})
+```
+ 4. 使用components属性定义局部子组件
+```javascript
+var vm=new Vue({
+	el:'#app',
+	data:{},
+	methods:{},
+	components:{
+		account:{
+			template:'<div><h1>这是Account组件</h1></login></login></div>',
+			components:{  //定义子组件的组件
+				login:{
+					template:'<h3>这是登录组件</h3>'
+				}
+			}
+		}
+	}
+})
+
+<div id="app">
+	<account></account>
+</div>
+```
+
+## 父组件向子组件传值
+注意：一定要使用props属性来定义父组件传递过来的数据
+```javascript
+var vm=new Vue({
+	el:'#app',
+	data:{
+		msg:'这是父组件中的数据"
+	},
+	components:{
+		son:{
+			template:'<h1>这是子组件 --- {{ finfo }}</h1>',
+			props:['finfo']
+		}
+	}
+});
+
+<div id="app">
+	<son :finfo="msg"></son>
+</div>
+```
+
+## 子组件向父组件传值
+原理：父组件将方法的引用，传递到子组件内部，子组件在内部调用父组件传递过来的方法，同时把要发送给父组件的数据，在调用方法的时候当做参数传递进去。
+ 1. 父组件将方法的引用传递给子组件，其中getMsg是父组件中定义的方法名称，func是子组件调用传递过来方法时候的方法名称。
+```javascript
+<son @func="getMsg"></son>
+```
+ 2. 子组件内部通过this.$emit('方法名','要传递的数据')方式，来调用父组件中的方法，同时把数据传递给父组件使用。
+```javascript
+<div id="app">
+	<son @func="getMsg"></son>
+	<!-- 组件模板定义 -->
+	<script type="x-template" id="son">
+		<div>
+			<input type="button" value="向父组件传值" @click="sendMsg" />
+		</div>
+	</script>
+</div>
+
+<script>
+	Vue.component('son',{
+		template:'#son',
+		methods:{
+			sendMsg(){
+				this.$emit('func','ok');  //调用父组件传递过来的方法，同时把数据传递出去
+			}
+	});
+	var vm=new Vue({
+		el:'#app',
+		data:{},
+		methods:{
+			getMsg(val){
+				alert(val);
+			}
+		}
+	})
+</script>
+```
+
+## watch和computed
+computed中可以定义一些属性，这些属性叫做计算属性，本质是一个方法，使用的时候，是把它们的名称直接当做属性来使用。计算属性所用到的任何data中的数据发生了变化，就会立即计算这个计算属性的值，结果会被缓存起来方便下次直接使用，有返回值。
+watch监视data中数据的变化，触发function处理函数，没有返回值，常用来监视路由的变化。
+```javascript
+computed:{
+	'fullname':function(){
+		return this.firstname+'-'+this.middlename+'-'+this.lastname;
+	}
+}
+watch:{
+	'firstname':function(newVal,oldVal){
+		this.fullname=newVal+'-'+this.lastname;
+	}
+	'lastname':function(newVal){
+		this.fullname=this.firstname+'-'+newVal;
+	}
+}
+```
+
+## Vue-resource
+ 1. 基于全局Vue对象使用http
+```javascript
+Vue.http.get('/url',[options]).then(successCallback,errorCallback)
+Vue.http.post('/url',[body],[options]).then(successCallback,errorCallback)
+```
+ 2. 在一个Vue实例内使用$http
+```javascript
+this.$http.get('/url',[options]).then(successCallback,errorCallback)
+this.$http.post('/url',[body],[options]).then(successCallback,errorCalback)
+```
+
+## axios
+ 1. get请求
+```javascript
+axios.get('/user?ID=123').then(function(response){
+	console.log(response);
+}).catch(functin(error){
+	console.log(error);
+});
+```
+ 2. post请求
+```javascript
+axios.post('/user',{firstname:'Fred',lastname:'Flintstone'}).then(function(response){
+	console.log(response);
+}).catch(function(error){
+	console.log(error);
+})
+```
+ 3. 执行多个并发请求
+```javascript
+function getUserAccount(){
+	return axios.get('/user/12345');
+}
+function getUserPermission(){
+	return axios.get('/user/12345/permissions');
+}
+axios.all([getUserAccount(),getUserPermission()]).then(axios.spread(function(acct,perms){
+	//两个请求现已完成
+}));
+```
+ 4. 拦截器
+
+请求拦截器
+```javascript
+axios.interceptors.request.use(function(config){
+	//在发送请求之前做某事
+	return config;
+},function(error){
+	//请求错误时做某事
+	return error;
+});
+```
+响应拦截器
+```javascript
+axios.interceptors.response.use(function(response){
+	//响应数据时做某事
+	return response;
+},function(error){
+	return Promise.reject(error);
+})
+```
+
+## Vue-router
+ 1. 导入Vue-router组件
+ 2. 使用router-link来导航
+```javascript
+<router-link to="/login">登录</router-link>
+```
+ 3. 使用router-view组件来显示匹配到的组件
+```javascript
+<router-view></router-view>
+```
+ 4. 创建组件
+```javascript
+var login=Vue.extend({
+	template:'<h1>登录组件</h1>'
+});
+var register=Vue.extend({
+	template:'<h1>注册组件</h1>'
+});
+```
+ 5. 创建一个路由实例router，通过routes属性来定义路由匹配规则
+```javascript
+var router=new VueRouter({
+	routes:[
+		{path:'/login',component:login},
+		{path:'/register',component:register}
+	]
+});
+```
+ 6. 使用router属性来使用路由规则
+```javascript
+var vm=new Vue({
+	el:'#app',
+	router:router
+});
+```
+ 7. 在路由规则中定义参数
+```javascript
+<router-link to="/login?id=10&name=zs"></router-link>
+var router=new VueRouter({
+	routes:[
+		{path:'/login',component:login}
+	]
+});
+```
+`this.$route.query.id`获取参数
+
+```javascript
+<router-link to="/login/12/ls"></router-link>
+```
+`this.$route.params.id`获取参数
+
+ 8. 使用children属性实现路由嵌套
+```javascript
+<div id="app">
+	<router-link to="/account">Account</router-link>
+	<router-view></router-view>
+</div>
+<script>
+	const account=Vue.extend({
+		template:'<div>这是account组件<router-link to="/account/login">login</router-link> | <router-link to="/account/register">register</router-link><router-view></router-view></div>'
+});
+var router=new VueRouter({
+	routes:[
+		{path:'/',redirect:'/account/login'},  //使用redirect实现路由重定向
+		{path:'/account',
+		component:account,
+		children:[  //通过children数组属性来实现路由的嵌套
+			{path:'login',component:login},  //子路由的path前面不要带"/",否则永远从根路径开始请求  此处也可写成/account/login
+			{path:'register',component:register}
+		]
+		}
+	]
+})
+```
+
+```javascript
+this.$router.push({path:'/login'});
+this.$router.push('/login');
+this.$router.push({name:login,params:{id:1}});
+this.$router.push({name:login,query:{id:1}});
+```
+
+## Vuex
+Vuex是Vue配套的公共数据管理工具，它可以把一些共享的数据保存到Vuex中，方便整个程序中的任何组件直接获取或修改我们的公共数据。
+```javascript
+var store=new Vuex.Store({
+	state:{
+		count:1
+	},
+	mutations:{
+		add(state,c){
+			state.count=state.count+1;
+			console.log(c.c,c.d);
+		},
+		reduction(state){
+			state.count=state.count-1;
+		}
+	},
+	getters:{
+		getStateCount:function(state){
+			return state.count+1;
+		}
+	}
+})
+
+<div id="app>
+	<h2>页面上直接获取的{{ this.$store.state.count }}</h2>
+	<h2>从getters获取的计算后的值{{ this.$store.getters.getStateCount }}</h2>
+	<p>count的值{{ this.$stor.state.count }}</p>
+	<button @click="addFun">+</button>
+	<button @click="reductionFun">-</button>
+</div>
+
+methods:{
+	addFun(){
+		this.$store.commit("add",{c:1,d:2});
+	},
+	reductionFun(){
+		this.$store.commit("reduction");
+	}
+}
+```
+
+```javascript
+this.$store.commit('方法名','按需传递的唯一的参数');
+```
+
+mutation第二个参数是通过commit传递过来的
+getters只负责对外提供数据，不负责修改数据，如果想要修改state中的数据去mutation，只要state中的数据变化，getters刚好也引用了这个数据，就会立即出发getters的重新求值，state中的数据需要包装。
+
+## 行内元素：a b span img input select strong
+## 块级元素：div ul li ol dd h1 h2 h3 h4 p
+## 常见的空元素：<br> <hr> <img> <input> <meta> <link>
+
+ 
+
